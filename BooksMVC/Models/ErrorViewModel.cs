@@ -1,4 +1,4 @@
-namespace BooksMVC.Models
+namespace BooksMVC.API.Models
 {
     public class ErrorViewModel
     {

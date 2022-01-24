@@ -1,13 +1,13 @@
-﻿using BooksMVC.DTOs;
-using BooksMVC.ViewModel;
+﻿using BooksMVC.DAL.Entities;
+using ApplicationModel = BooksMVC.Application.Model;
 
-namespace BookMVC.DAL.Mappers
+namespace BooksMVC.DAL.Mappers
 {
     internal static class BookMapper
     {
-        public static BookVm MapToVm(this Book book)
+        public static ApplicationModel.Book MapToApplicationModel(this Book book)
         {
-            return new BookVm
+            return new ApplicationModel.Book
             {
                 Id = book.Id,
                 Author = book.Author,
@@ -17,7 +17,7 @@ namespace BookMVC.DAL.Mappers
             };
         }
 
-        public static Book MapToEntity(this NewBookDTO book)
+        public static Book MapToEntity(this ApplicationModel.Book book)
         {
             return new Book
             {

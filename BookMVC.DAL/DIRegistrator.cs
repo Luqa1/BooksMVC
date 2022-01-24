@@ -1,7 +1,8 @@
-﻿using BooksMVC.Repositories;
+﻿using BooksMVC.Application.Repositories;
+using BooksMVC.DAL.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookMVC.DAL
+namespace BooksMVC.DAL
 {
     public static class DIRegistrator
     {

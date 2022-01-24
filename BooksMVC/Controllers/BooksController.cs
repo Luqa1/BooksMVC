@@ -1,11 +1,11 @@
-﻿using BooksMVC.DTOs;
-using BooksMVC.Repositories;
-using BooksMVC.ViewModel;
+﻿using BooksMVC.API.DTOs;
+using BooksMVC.API.Mappers;
+using BooksMVC.Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace BooksMVC.Controllers
+namespace BooksMVC.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -22,7 +22,8 @@ namespace BooksMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
         {
-            return Ok(await _booksRepository.GetAllBooksAsync(cancellationToken));
+            var allBooks = await _booksRepository.GetAllBooksAsync(cancellationToken);
+            return Ok(allBooks.Select(x => x.ToVm()));
         }
 
         // GET api/<BooksController>/5
@@ -33,7 +34,7 @@ namespace BooksMVC.Controllers
             if (book == null)
                 return NotFound();
 
-            return Ok(book);
+            return Ok(book.ToVm());
         }
 
         // POST api/<BooksController>
@@ -43,19 +44,44 @@ namespace BooksMVC.Controllers
             if (string.IsNullOrWhiteSpace(dto.Title))
                 ModelState.AddModelError(nameof(dto.Title), "Title is required");
 
-            return Ok(await _booksRepository.AddBookAsync(dto, cancellationToken));
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var book = dto.ToApplicationModel();
+            return Ok(await _booksRepository.AddBookAsync(book, cancellationToken));
         }
 
         // PUT api/<BooksController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateBookDTO dto, CancellationToken cancellationToken = default)
         {
+            var currentBook = await _booksRepository.GetBookAsync(id, cancellationToken);
+            if (currentBook == null)
+                return NotFound();
+
+            if (string.IsNullOrWhiteSpace(dto.Title))
+                ModelState.AddModelError(nameof(dto.Title), "Title is required");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var updatedBook = dto.ToApplicationModel();
+            updatedBook.Id = id;
+            await _booksRepository.UpdateBookAsync(updatedBook, cancellationToken);
+
+            return NoContent();
         }
 
         // DELETE api/<BooksController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
         {
+            var currentBook = await _booksRepository.GetBookAsync(id, cancellationToken);
+            if (currentBook == null)
+                return NotFound();
+
+            await _booksRepository.DeleteBookAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }

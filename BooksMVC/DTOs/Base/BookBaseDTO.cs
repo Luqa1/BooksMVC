@@ -1,8 +1,7 @@
-﻿namespace BooksMVC.API.ViewModel
+﻿namespace BooksMVC.API.DTOs.Base
 {
-    public class BookVm
+    public abstract class BookBaseDTO
     {
-        public int Id { get; set; }
         public string? Index { get; set; }
         public string? Title { get; set; }
         public string? Author { get; set; }

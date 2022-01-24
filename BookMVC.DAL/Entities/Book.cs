@@ -1,6 +1,6 @@
-﻿namespace BookMVC.DAL
+﻿namespace BooksMVC.DAL.Entities
 {
-    public class Book
+    class Book
     {
         public int Id { get; set; }
         public string? Index { get; set; }

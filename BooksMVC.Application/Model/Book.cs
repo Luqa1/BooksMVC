@@ -1,6 +1,6 @@
-﻿namespace BooksMVC.API.ViewModel
+﻿namespace BooksMVC.Application.Model
 {
-    public class BookVm
+    public class Book
     {
         public int Id { get; set; }
         public string? Index { get; set; }

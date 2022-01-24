@@ -1,4 +1,4 @@
-using BooksMVC;
+using BooksMVC.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.RegisterServices();
+builder.Services.RegisterDalServices();
 
 var app = builder.Build();
 

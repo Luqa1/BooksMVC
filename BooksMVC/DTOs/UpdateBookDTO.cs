@@ -2,7 +2,7 @@
 
 namespace BooksMVC.API.DTOs
 {
-    public class NewBookDTO : BookBaseDTO
+    public class UpdateBookDTO : BookBaseDTO
     {
     }
 }

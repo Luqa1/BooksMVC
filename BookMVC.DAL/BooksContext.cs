@@ -1,4 +1,6 @@
-﻿namespace BookMVC.DAL
+﻿using BooksMVC.DAL.Entities;
+
+namespace BooksMVC.DAL
 {
     internal class BooksContext
     {
