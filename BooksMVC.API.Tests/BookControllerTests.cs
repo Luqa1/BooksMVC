@@ -1,30 +1,54 @@
 using BooksMVC.API.Controllers;
-using Microsoft.Extensions.DependencyInjection;
+using BooksMVC.API.ViewModel;
+using BooksMVC.DAL;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using Xunit;
-using AppRepos = BooksMVC.Application.Repositories;
+using System.Linq;
 using DalRepos = BooksMVC.DAL.Repositories;
 
 namespace BooksMVC.API.Tests
 {
     public class BookControllerTests
     {
-        //TODO implementation
-        //private readonly ServiceProvider _serviceProvider;
+        private readonly BooksController _booksController = 
+            new BooksController(
+                new Logger<BooksController>(new LoggerFactory()), 
+                new DalRepos.BooksRepository(new BooksContext(true)));
 
-        //public BookControllerTests(BooksController booksController)
-        //{
-        //    var services = new ServiceCollection();
-        //    services.AddSingleton<BooksController>();
-        //    services.AddSingleton<AppRepos.IBooksRepository, DalRepos.BooksRepository>();
+        [Fact]
+        public void GetAllBooks_TestCountOFResultCollection_ShouldContain2()
+        {
+            if (_booksController.Get().Result is OkObjectResult okObjectResult)
+            {
+                if (okObjectResult.Value is IEnumerable<BookVm> bookVms)
+                {
+                    Assert.True(bookVms.Count() == 2);
+                }
+                else
+                    Assert.True(false);
+            }
+            else
+                Assert.True(false);
+        }
 
-        //    _serviceProvider = services.BuildServiceProvider();
-        //}
+        [Fact]
+        public void GetBook_TestNotFound_ShouldReturnNotFoundResult()
+        {
+            if (_booksController.Get(9999).Result is NotFoundResult)
+                Assert.True(true);
+            else
+                Assert.True(false);
+        }
 
-        //[Fact]
-        //public void Test1()
-        //{
-        //    var controller = _serviceProvider.GetService<BooksController>();
-        //    controller.Get();
-        //}
+        [Fact]
+        public void GetBook_TestNotFound_ShouldReturnOkdResult()
+        {
+            if (_booksController.Get(1).Result is OkObjectResult)
+                Assert.True(true);
+            else
+                Assert.True(false);
+        }
     }
 }

@@ -5,26 +5,34 @@ namespace BooksMVC.DAL
     internal class BooksContext
     {
         public BooksContext()
+            : this(false)
+        {
+        }
+
+        public BooksContext(bool initByTestData)
         {
             Books = new List<Book>();
 
-            Books.Add(new Book 
+            if (initByTestData)
             {
-                Id = 1,
-                Index = "1112233",
-                Title = "Tajniki C#",
-                Author = "Nieznany",
-                Price = 99
-            });
+                Books.Add(new Book
+                {
+                    Id = 1,
+                    Index = "1112233",
+                    Title = "Tajniki C#",
+                    Author = "Nieznany",
+                    Price = 99
+                });
 
-            Books.Add(new Book
-            {
-                Id = 2,
-                Index = "678546757894",
-                Title = "Tajniki Javascript",
-                Author = "Również nieznany",
-                Price = 89
-            });
+                Books.Add(new Book
+                {
+                    Id = 2,
+                    Index = "678546757894",
+                    Title = "Tajniki Javascript",
+                    Author = "Również nieznany",
+                    Price = 89
+                });
+            }
         }
 
 
