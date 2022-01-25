@@ -1,8 +1,10 @@
 ﻿using BooksMVC.Application.Repositories;
 using BooksMVC.DAL.Exceptions;
+using System.Runtime.CompilerServices;
 using BooksMVC.DAL.Mappers;
 using ApplicationModel = BooksMVC.Application.Model;
 
+[assembly: InternalsVisibleTo("BooksMVC.API.Tests")]
 namespace BooksMVC.DAL.Repositories
 {
     internal class BooksRepository : IBooksRepository

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksMVC.DAL", "BookMVC.DAL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksMVC.Application", "BooksMVC.Application\BooksMVC.Application.csproj", "{A99F3120-593A-4552-967C-B48E379B8EB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksMVC.API.Tests", "BooksMVC.API.Tests\BooksMVC.API.Tests.csproj", "{F22605CE-07AD-411E-B01D-0E1BCA6499E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A99F3120-593A-4552-967C-B48E379B8EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99F3120-593A-4552-967C-B48E379B8EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A99F3120-593A-4552-967C-B48E379B8EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22605CE-07AD-411E-B01D-0E1BCA6499E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22605CE-07AD-411E-B01D-0E1BCA6499E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22605CE-07AD-411E-B01D-0E1BCA6499E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22605CE-07AD-411E-B01D-0E1BCA6499E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

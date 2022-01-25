@@ -1,9 +1,17 @@
 using BooksMVC.DAL;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.ReturnHttpNotAcceptable = true;
+    options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", "application/xml");
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterDalServices();
